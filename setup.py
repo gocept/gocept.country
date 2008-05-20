@@ -12,7 +12,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='gocept.country',
-    version='0.9dev',
+    version='0.1dev',
     author='Sebastian Wehrmann, Christian Theune',
     author_email='sw@gocept.com',
     description='Zope 3 sources for pycountry databases',
