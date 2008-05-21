@@ -1,0 +1,7 @@
+<configure
+  xmlns="http://namespaces.zope.org/zope">
+
+  <!-- This file is the equivalent of site.zcml and it is -->
+  <!-- used for functional testing setup -->
+  <include package="gocept.country" />
+</configure>

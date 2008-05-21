@@ -2,5 +2,9 @@
   xmlns="http://namespaces.zope.org/zope"
   xmlns:i18n="http://namespaces.zope.org/i18n">
 
-  <i18n:registerTranslations directory="." />
+  <include package="zope.i18n" file="meta.zcml" />
+
+  <configure package="pycountry">
+    <i18n:registerTranslations directory="locales" />
+  </configure>
 </configure>

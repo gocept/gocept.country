@@ -107,3 +107,21 @@ Languages are similar, too:
   >>> abkhazian = languages.next()
   >>> abkhazian.name
   u'Abkhazian'
+
+
+Translations
+============
+
+
+First we fetch a specific country:
+
+  >>> countries = list(iter(countries_field.source))
+  >>> germany = countries[80]
+  >>> germany.name
+  u'Germany'
+
+
+The i18n translate method translates 'Germany' into german:
+
+  >>> zope.i18n.translate(germany.name, target_language='de')
+  u'Deutschland'
