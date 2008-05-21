@@ -14,7 +14,7 @@ def read(*rnames):
 
 setup(
     name='gocept.country',
-    version='0.1dev',
+    version='0.1',
     author='Sebastian Wehrmann, Christian Theune',
     author_email='sw@gocept.com',
     description='Zope 3 sources for pycountry databases',
