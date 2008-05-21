@@ -7,78 +7,103 @@ gocept.country provides Zope 3 sources for the pycountry databases. You can
 use it e.g. to get a zope.schema.Choice field with all iso 3166 countries.
 
   >>> import gocept.country
+  >>> import gocept.country.db
+  >>> import zope.schema
 
 
 ISO 3166 countries
 ==================
 
-For the iso 3166 countries, use the gocept.pycountry.countries sourcefactory:
+To get a list of ISO 3166 countries in a webform, you can use the
+zope.schema.Choice field and provide the gocept.country.countries as source:
 
-  >>> country_source = gocept.country.countries
-  >>> country_source
-  <zc.sourcefactory.source.FactoredSource object at 0x...>
-
-
-Use the getValues() method to get an countries iterator:
-
-  >>> country_iterator = country_source.factory.getValues()
-  >>> country_iterator
-  <listiterator object at 0x...>
+  >>> countries_field = zope.schema.Choice(title=u'Country',
+  ...                            source=gocept.country.countries)
+  >>> countries_field
+  <zope.schema._field.Choice object at 0x...>
+  >>> countries = iter(countries_field.source)
 
 
-That iterator can be used to retrieve the countries:
+The gocept.country.countries sourcefactory returns Country objects as values,
+which use the values from pycountry:
 
-  >>> afghanistan = country_iterator.next()
+  >>> afghanistan = countries.next()
   >>> afghanistan
-  <pycountry.db.Country object at 0x...>
-
-
-The method getTitle(country) returns the iso 3166 name of a country.
-getToken(country) returns the alpha 2 value of the given country.
-
-  >>> country_source.factory.getTitle(afghanistan)
+  <gocept.country.db.Country object at 0x...>
+  >>> afghanistan.name
   u'Afghanistan'
-  >>> country_source.factory.getToken(afghanistan)
+
+Calling the next() method again returns the next country from the source:
+
+  >>> islands = countries.next()
+  >>> islands.name
+  u'\xc5land Islands'
+
+
+There are all information available, which you can get from pycountry:
+
+  >>> afghanistan.alpha2
   'AF'
+  >>> afghanistan.alpha3
+  'AFG'
+  >>> afghanistan.numeric
+  '004'
+  >>> afghanistan.official_name
+  'Islamic Republic of Afghanistan'
 
 
-ISO 639 languages
+ISO 15924 Scripts
 =================
 
-The iso 639 languages are available similar to the countries:
+Scripts are similar to countries:
 
-  >>> afar = gocept.country.languages.factory.getValues().next()
-  >>> afar
-  <pycountry.db.Language object at 0x...>
-  >>> gocept.country.languages.factory.getTitle(afar)
-  u'Afar'
-  >>> gocept.country.languages.factory.getToken(afar)
-  'aa'
+  >>> scripts_field = zope.schema.Choice(title=u'Script',
+  ...                            source=gocept.country.scripts)
+  >>> scripts = iter(scripts_field.source)
 
 
-ISO 15924 scripts
-=================
-
-The iso 14924 scripts are available similar to the countries:
-
-  >>> arabic = gocept.country.scripts.factory.getValues().next()
-  >>> arabic
-  <pycountry.db.Script object at 0x...>
-  >>> gocept.country.scripts.factory.getTitle(arabic)
+  >>> arabic = scripts.next()
+  >>> arabic.name
   u'Arabic'
-  >>> gocept.country.scripts.factory.getToken(arabic)
-  'Arab'
+
+  >>> aramaic = scripts.next()
+  >>> aramaic.name
+  u'Imperial Aramaic'
 
 
-ISO 4217 currencies
+ISO 4217 Currencies
 ===================
 
-The iso 4217 currencies are available similar to the countries:
+Currencies are, again, similar to the ones before:
 
-  >>> dirham = gocept.country.currencies.factory.getValues().next()
-  >>> dirham
-  <pycountry.db.Currency object at 0x...>
-  >>> gocept.country.currencies.factory.getTitle(dirham)
+  >>> currencies_field = zope.schema.Choice(title=u'Currency',
+  ...                            source=gocept.country.currencies)
+
+  >>> currencies = iter(currencies_field.source)
+
+  >>> dirham = currencies.next()
+  >>> dirham.name
   u'UAE Dirham'
-  >>> gocept.country.currencies.factory.getToken(dirham)
-  'AED'
+
+  >>> afghani = currencies.next()
+  >>> afghani.name
+  u'Afghani'
+
+
+ISO 639 Languages
+=================
+
+Languages are similar, too:
+
+  >>> languages_field = zope.schema.Choice(title=u'Language',
+  ...                            source=gocept.country.languages)
+
+  >>> languages = iter(languages_field.source)
+
+  >>> afar = languages.next()
+  >>> afar.name
+  u'Afar'
+
+  >>> abkhazian = languages.next()
+  >>> abkhazian.name
+  u'Abkhazian'

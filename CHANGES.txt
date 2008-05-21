@@ -5,6 +5,10 @@ Changes
 0.2 (unreleased)
 ------------------
 
+- gocept.country now returns special ``proxy objects'' instead of pycountry
+  objects for a better object-oriented purpose and flexibility in handling the
+  result
+- improved test cases
 
 0.1 (2008-05-20)
 ------------------
