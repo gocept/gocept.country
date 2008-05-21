@@ -6,7 +6,7 @@
 
 import os.path
 
-from zope.testing import doctest
+import zope.testing
 import zope.app.testing.functional
 import unittest
 
@@ -17,8 +17,8 @@ layer = zope.app.testing.functional.ZCMLLayer(
 def test_suite():
     suite = unittest.TestSuite()
     test = zope.app.testing.functional.FunctionalDocFileSuite(
-                                       'README.txt',
-                                       optionflags=doctest.ELLIPSIS)
+                                   'README.txt',
+                                   optionflags=zope.testing.doctest.ELLIPSIS)
     test.layer = layer
     suite.addTest(test)
     return suite

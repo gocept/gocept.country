@@ -45,6 +45,9 @@ setup(
     install_requires=['pycountry',
                       'zope.i18nmessageid',
                       'zc.sourcefactory',
-                      'zope.schema',
-                     ],
+    ],
+    extras_require = dict(
+        test=['zope.testing',
+              'zope.app.testing',
+              'zope.schema'])
     )
