@@ -19,6 +19,9 @@ class Data(object):
             return False
         return self.token == other.token
 
+    def __reduce__(self):
+        return (self.__class__, (self.token, ))
+
     def __getattr__(self, name):
         return getattr(self._obj, name)
 

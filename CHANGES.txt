@@ -5,11 +5,15 @@ Changes
 0.3 (unreleased)
 ----------------
 
+- added test for comparing the returned countries to equality
+- added __reduce__ to data objects so that they can be pickled
+- added tests for pickling and unpickling data objects
+
 
 0.2 (2008-05-20)
 ----------------
 
-- gocept.country now returns special "proxy objects" instead of pycountry
+- gocept.country now returns special data objects instead of pycountry
   objects for a better object-oriented purpose and flexibility in handling the
   result
 - improved configure.zcml and added functional tests for the i18n translations

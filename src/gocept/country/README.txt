@@ -33,6 +33,7 @@ which use the values from pycountry:
   >>> afghanistan.name
   u'Afghanistan'
 
+
 Calling the next() method again returns the next country from the source:
 
   >>> islands = countries.next()
@@ -125,3 +126,67 @@ The i18n translate method translates 'Germany' into german:
 
   >>> zope.i18n.translate(germany.name, target_language='de')
   u'Deutschland'
+
+
+Translations are also operating for scripts, currencies and languages.
+
+
+Comparison
+==========
+
+
+Countries, scripts, currenties and languages can be compared to equality. To
+test this, we will need another country object afghanistan, which is not the
+*same* object as retrieved before:
+
+
+  >>> countries = iter(countries_field.source)
+  >>> afghanistan = countries.next()
+  >>> countries = iter(countries_field.source)
+  >>> afghanistan2 = countries.next()
+
+  >>> str(afghanistan) == str(afghanistan2)
+  False
+
+
+Comparing them will get the token for each and compare it:
+
+  >>> afghanistan == afghanistan2
+  True
+
+
+Pickling and unpickling
+=======================
+
+
+It should be possible to store "proxy objects" in a database (like the ZODB).
+Therefore, they have to be pickleable:
+
+  >>> import StringIO
+  >>> import cPickle
+  >>> f = StringIO.StringIO('')
+  >>> f.read()
+  ''
+
+
+Pickling a country should never raise an error...
+
+  >>> cPickle.dump(afghanistan, f)
+
+
+... and results in storing the token in the pickle:
+
+  >>> f.seek(0)
+  >>> 'AF' in f.read()
+  True
+
+
+Reading the pickle again will return the same country which was pickled
+before:
+
+  >>> f.seek(0)
+  >>> afghanistan2 = cPickle.load(f)
+  >>> afghanistan2 == afghanistan
+  True
+  >>> afghanistan2.name
+  u'Afghanistan'
