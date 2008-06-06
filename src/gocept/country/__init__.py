@@ -3,12 +3,28 @@ import pycountry
 
 import gocept.country.db
 
-class CountrySource(zc.sourcefactory.basic.BasicSourceFactory):
+
+class BasicSource(zc.sourcefactory.basic.BasicSourceFactory):
+    """A basic source for countries, scripts, languages and currencies."""
+
+    def __init__(self, **kw):
+        super(BasicSource, self).__init__()
+        self.filter = kw
+
+    def __contains__(self, item):
+        for token, values in self.filter.items():
+            if (getattr(item, token, None) not in values):
+                return False
+        return True
+
+
+class CountrySource(BasicSource):
     """Source for the pycountry countries."""
 
     def getValues(self):
         for country in pycountry.countries:
-            yield gocept.country.db.Country(country.alpha2)
+            if country in self:
+                yield gocept.country.db.Country(country.alpha2)
 
     def getTitle(self, value):
         return value.name
@@ -17,12 +33,17 @@ class CountrySource(zc.sourcefactory.basic.BasicSourceFactory):
         return value.alpha2
 
 
-class ScriptSource(zc.sourcefactory.basic.BasicSourceFactory):
+class ScriptSource(BasicSource):
     """Source for the pycountry scripts."""
+
+    def __init__(self, **kw):
+        super(ScriptSource, self).__init__()
+        self.filter = kw
 
     def getValues(self):
         for script in pycountry.scripts:
-            yield gocept.country.db.Script(script.alpha4)
+            if script in self:
+                yield gocept.country.db.Script(script.alpha4)
 
     def getTitle(self, value):
         return value.name
@@ -31,12 +52,17 @@ class ScriptSource(zc.sourcefactory.basic.BasicSourceFactory):
         return value.alpha4
 
 
-class CurrencySource(zc.sourcefactory.basic.BasicSourceFactory):
+class CurrencySource(BasicSource):
     """Source for the pycountry currencies."""
+
+    def __init__(self, **kw):
+        super(CurrencySource, self).__init__()
+        self.filter = kw
 
     def getValues(self):
         for currency in pycountry.currencies:
-            yield gocept.country.db.Currency(currency.letter)
+            if currency in self:
+                yield gocept.country.db.Currency(currency.letter)
 
     def getTitle(self, value):
         return value.name
@@ -45,12 +71,17 @@ class CurrencySource(zc.sourcefactory.basic.BasicSourceFactory):
         return value.letter
 
 
-class LanguageSource(zc.sourcefactory.basic.BasicSourceFactory):
+class LanguageSource(BasicSource):
     """Source for the pycountry languages."""
+
+    def __init__(self, **kw):
+        super(LanguageSource, self).__init__()
+        self.filter = kw
 
     def getValues(self):
         for language in pycountry.languages:
-            yield gocept.country.db.Language(language.bibliographic)
+            if language in self:
+                yield gocept.country.db.Language(language.bibliographic)
 
     def getTitle(self, value):
         return value.name

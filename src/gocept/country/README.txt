@@ -11,7 +11,7 @@ use it e.g. to get a zope.schema.Choice field with all iso 3166 countries.
   >>> import zope.schema
 
 
-ISO 3166 countries
+ISO 3166 Countries
 ==================
 
 To get a list of ISO 3166 countries in a webform, you can use the
@@ -53,6 +53,44 @@ There are all information available, which you can get from pycountry:
   'Islamic Republic of Afghanistan'
 
 
+To smaller the amount of results you can provide a list or tuple of countries
+you like to have in your source:
+
+  >>> countries = iter(gocept.country.CountrySource(alpha2=['DE', 'US']))
+  >>> countries.next().name
+  u'Germany'
+  >>> countries.next().name
+  u'United States'
+  >>> countries.next().name
+  Traceback (most recent call last):
+  ...
+  StopIteration
+
+
+Please note, that the result items are sorted by *alpha2* code. Please also
+note, that you can provide alpha3 and numeric codes and names resp.
+official_names to smaller the amount of result items, too:
+
+  >>> len(list(gocept.country.CountrySource()))
+  246
+  >>> len(list(gocept.country.CountrySource(alpha2=['DE', 'US', 'GB'])))
+  3
+  >>> len(list(gocept.country.CountrySource(alpha3=['DEU', 'USA'])))
+  2
+  >>> len(list(gocept.country.CountrySource(numeric=['276', ])))
+  1
+  >>> countries_list = ['Germany', 'Italy', 'Poland', 'France']
+  >>> len(list(gocept.country.CountrySource(name=countries_list)))
+  4
+
+
+Providing codes, which are not present, does not results in an exception but
+in an empty list:
+
+  >>> len(list(gocept.country.CountrySource(capital=['Berlin', 'Paris'])))
+  0
+
+
 ISO 15924 Scripts
 =================
 
@@ -70,6 +108,20 @@ Scripts are similar to countries:
   >>> aramaic = scripts.next()
   >>> aramaic.name
   u'Imperial Aramaic'
+
+
+Please note, that the result items are sorted by *alpha4* code. Please also
+note, that you can provide names and numeric codes to smaller the amount of
+result items, too.
+
+  >>> len(list(gocept.country.ScriptSource()))
+  131
+  >>> len(list(gocept.country.ScriptSource(alpha4=['Arab', 'Latn'])))
+  2
+  >>> len(list(gocept.country.ScriptSource(numeric=['215', ])))
+  1
+  >>> len(list(gocept.country.ScriptSource(name=['Arabic', 'Latin'])))
+  2
 
 
 ISO 4217 Currencies
@@ -91,6 +143,20 @@ Currencies are, again, similar to the ones before:
   u'Afghani'
 
 
+Please note, that the result items are sorted by *letter* code. Please also
+note, that you can provide names and numeric codes to smaller the amount of
+result items, too.
+
+  >>> len(list(gocept.country.CurrencySource()))
+  183
+  >>> len(list(gocept.country.CurrencySource(letter=['ARS', 'AED', 'AFN'])))
+  3
+  >>> len(list(gocept.country.CurrencySource(numeric=['032', '784'])))
+  2
+  >>> len(list(gocept.country.CurrencySource(name=['Afghani', ])))
+  1
+
+
 ISO 639 Languages
 =================
 
@@ -108,6 +174,22 @@ Languages are similar, too:
   >>> abkhazian = languages.next()
   >>> abkhazian.name
   u'Abkhazian'
+
+
+Please note, that the result items are sorted by *bibliographic*. Please also
+note, that you can provide alpha2 and terminology codes and names to smaller
+the amount of result items, too.
+
+  >>> len(list(gocept.country.LanguageSource()))
+  486
+  >>> len(list(gocept.country.LanguageSource(alpha2=['an', 'en', 'de'])))
+  3
+  >>> len(list(gocept.country.LanguageSource(bibliographic=['eng', 'ger'])))
+  2
+  >>> len(list(gocept.country.LanguageSource(terminology=['arg', 'abk'])))
+  2
+  >>> len(list(gocept.country.LanguageSource(name=['English', 'German'])))
+  2
 
 
 Translations
