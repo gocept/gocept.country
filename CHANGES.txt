@@ -5,6 +5,7 @@ Changes
 0.5 (unreleased)
 ----------------
 
+- Fixed bug in token comparison.
 
 0.4 (2008-06-10)
 ----------------

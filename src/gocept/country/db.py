@@ -17,6 +17,8 @@ class Data(object):
     def __eq__(self, other):
         if not other:
             return False
+        if not isinstance(other, self.__class__):
+            return False
         return self.token == other.token
 
     def __reduce__(self):

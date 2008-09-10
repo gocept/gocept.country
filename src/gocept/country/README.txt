@@ -236,6 +236,13 @@ Comparing them will get the token for each and compare it:
   >>> afghanistan == afghanistan2
   True
 
+Comparing with an instance of another class always returns False:
+
+  >>> afghanistan == None
+  False
+  >>> afghanistan == object()
+  False
+
 
 Pickling and unpickling
 =======================
