@@ -3,5 +3,8 @@
 
   <!-- This file is the equivalent of site.zcml and it is -->
   <!-- used for functional testing setup -->
+
+  <include package="zope.app.component" file="meta.zcml" />
+
   <include package="gocept.country" />
 </configure>

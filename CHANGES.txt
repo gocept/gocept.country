@@ -1,9 +1,13 @@
 Changes
 =======
 
+0.4.2 (2008-09-10)
+------------------
 
-0.5 (unreleased)
-----------------
+- Added security declarations for tokens.
+
+0.4.1 (2008-09-10)
+------------------
 
 - Fixed bug in token comparison.
 

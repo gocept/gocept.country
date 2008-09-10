@@ -9,7 +9,6 @@ iso639msg = zope.i18nmessageid.MessageFactory('iso639')
 
 class Data(object):
     """ """
-    # XXX: implement __reduce__ to limit size of pickles
 
     def __init__(self, token):
         self.token = token
