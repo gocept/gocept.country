@@ -8,6 +8,11 @@
     <allow attributes="name alpha2" />
   </class>
 
+  <class class=".db.Subdivision">
+    <allow attributes="name code" />
+  </class>
+
+
   <class class=".db.Script">
     <allow attributes="name alpha4" />
   </class>
