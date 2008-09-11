@@ -4,7 +4,7 @@ Changes
 0.5 (unreleased)
 ----------------
 
-- 
+- Added support for country subdivisions.
 
 0.4.2 (2008-09-10)
 ------------------

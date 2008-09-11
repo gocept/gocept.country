@@ -90,6 +90,44 @@ in an empty list:
   >>> len(list(gocept.country.CountrySource(capital=['Berlin', 'Paris'])))
   0
 
+ISO 3166-2 Country subdivisions
+===============================
+
+Country subdivisions are similar to countries:
+
+  >>> subdivisions_field = zope.schema.Choice(
+  ...     title=u'Country subdivisions', source=gocept.country.subdivisions)
+  >>> subdivisions = iter(subdivisions_field.source)
+
+  >>> la_vella = subdivisions.next()
+  >>> la_vella.name
+  u'Andorra la Vella'
+  >>> la_vella.code
+  'AD-07'
+
+  >>> canillo = subdivisions.next()
+  >>> canillo.name
+  u'Canillo'
+  >>> canillo.code
+  'AD-02'
+
+Please note, that the result items are sorted by their *code*. Please
+also note, that you can provide names and numeric codes to smaller the
+amount of result items, too.
+
+  >>> len(list(gocept.country.SubdivisionSource()))
+  4548
+  >>> len(list(gocept.country.SubdivisionSource(code=['DE-ST', 'US-WA'])))
+  2
+  >>> len(list(gocept.country.SubdivisionSource(country_code=['DE'])))
+  16
+  >>> [x.name 
+  ...  for x in gocept.country.SubdivisionSource(country_code=['DE'])][1:3]
+  [u'Bayern', u'Bremen']
+  >>> len(list(gocept.country.SubdivisionSource(
+  ...     name=[u'Bayern', u'Bremen'])))
+  2
+
 
 ISO 15924 Scripts
 =================

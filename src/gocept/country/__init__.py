@@ -17,6 +17,9 @@ class BasicSource(zc.sourcefactory.basic.BasicSourceFactory):
                 return False
         return True
 
+    def getTitle(self, value):
+        return value.name
+
 
 class CountrySource(BasicSource):
     """Source for the pycountry countries."""
@@ -26,27 +29,28 @@ class CountrySource(BasicSource):
             if country in self:
                 yield gocept.country.db.Country(country.alpha2)
 
-    def getTitle(self, value):
-        return value.name
-
     def getToken(self, value):
         return value.alpha2
 
 
+class SubdivisionSource(BasicSource):
+    """Source for the pycountry country subdivisions."""
+
+    def getValues(self):
+        for subdivision in pycountry.subdivisions:
+            if subdivision in self:
+                yield gocept.country.db.Subdivision(subdivision.code)
+
+    def getToken(self, value):
+        return value.code
+
 class ScriptSource(BasicSource):
     """Source for the pycountry scripts."""
-
-    def __init__(self, **kw):
-        super(ScriptSource, self).__init__()
-        self.filter = kw
 
     def getValues(self):
         for script in pycountry.scripts:
             if script in self:
                 yield gocept.country.db.Script(script.alpha4)
-
-    def getTitle(self, value):
-        return value.name
 
     def getToken(self, value):
         return value.alpha4
@@ -55,17 +59,10 @@ class ScriptSource(BasicSource):
 class CurrencySource(BasicSource):
     """Source for the pycountry currencies."""
 
-    def __init__(self, **kw):
-        super(CurrencySource, self).__init__()
-        self.filter = kw
-
     def getValues(self):
         for currency in pycountry.currencies:
             if currency in self:
                 yield gocept.country.db.Currency(currency.letter)
-
-    def getTitle(self, value):
-        return value.name
 
     def getToken(self, value):
         return value.letter
@@ -74,23 +71,17 @@ class CurrencySource(BasicSource):
 class LanguageSource(BasicSource):
     """Source for the pycountry languages."""
 
-    def __init__(self, **kw):
-        super(LanguageSource, self).__init__()
-        self.filter = kw
-
     def getValues(self):
         for language in pycountry.languages:
             if language in self:
                 yield gocept.country.db.Language(language.bibliographic)
-
-    def getTitle(self, value):
-        return value.name
 
     def getToken(self, value):
         return value.bibliographic
 
 
 countries = CountrySource()
+subdivisions = SubdivisionSource()
 scripts = ScriptSource()
 currencies = CurrencySource()
 languages = LanguageSource()

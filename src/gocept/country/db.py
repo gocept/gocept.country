@@ -2,6 +2,7 @@ import zope.i18nmessageid
 import pycountry
 
 iso3166msg = zope.i18nmessageid.MessageFactory('iso3166')
+iso3166_2msg = zope.i18nmessageid.MessageFactory('iso3166_2')
 iso15924msg = zope.i18nmessageid.MessageFactory('iso15924')
 iso4217msg = zope.i18nmessageid.MessageFactory('iso4217')
 iso639msg = zope.i18nmessageid.MessageFactory('iso639')
@@ -39,6 +40,16 @@ class Country(Data):
     @property
     def _obj(self):
         return pycountry.countries.get(alpha2=self.token)
+
+
+class Subdivision(Data):
+    """Provides access to pycountry country subdivisions (ISO 3166-2)."""
+
+    _msg = iso3166_2msg
+
+    @property
+    def _obj(self):
+        return pycountry.subdivisions.get(code=self.token)
 
 
 class Script(Data):
