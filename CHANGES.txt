@@ -1,7 +1,7 @@
 Changes
 =======
 
-0.5 (unreleased)
+0.5 (2008-09-11)
 ----------------
 
 - Added support for country subdivisions.
@@ -44,3 +44,9 @@ Changes
 ----------------
 
 - initial release
+
+Contributors
+============
+
+- Michael Howitz <mh at gocept dot com>
+
