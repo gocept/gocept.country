@@ -1,5 +1,13 @@
-import zope.i18nmessageid
+# -*- coding: latin-1 -*-
+# Copyright (c) 2008 gocept gmbh & co. kg
+# See also LICENSE.txt
+# $Id$
+
+import gocept.country.interfaces
 import pycountry
+import zope.i18nmessageid
+import zope.interface
+
 
 iso3166msg = zope.i18nmessageid.MessageFactory('iso3166')
 iso3166_2msg = zope.i18nmessageid.MessageFactory('iso3166_2')
@@ -34,6 +42,8 @@ class Data(object):
 
 class Country(Data):
     """Provides access to pycountry countries (ISO 3166)."""
+
+    zope.interface.implements(gocept.country.interfaces.ICountry)
 
     _msg = iso3166msg
 

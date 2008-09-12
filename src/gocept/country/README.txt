@@ -93,6 +93,9 @@ in an empty list:
 ISO 3166-2 Country subdivisions
 ===============================
 
+Contextless source
+------------------
+
 Country subdivisions are similar to countries:
 
   >>> subdivisions_field = zope.schema.Choice(
@@ -127,6 +130,63 @@ amount of result items, too.
   >>> len(list(gocept.country.SubdivisionSource(
   ...     name=[u'Bayern', u'Bremen'])))
   2
+
+Contextual source
+-----------------
+
+There is also a contextual source for country subdivisions which
+depends on a country. Let's set up a context object first:
+
+  >>> import zope.interface
+  >>> class IAddress(zope.interface.Interface):
+  ...     country = zope.interface.Attribute("The country of the address.")
+  ...     subdivision = zope.schema.Choice(
+  ...         title=u'Country subdivisions', 
+  ...         source=gocept.country.contextual_subdivisions)
+
+  >>> class Address(object):
+  ...     zope.interface.implements(IAddress)
+  >>> address = Address()
+  >>> address.country = gocept.country.db.Country('DE')
+
+The contextual source expects an adapter between the context and
+gocept.country.interfaces.ICountry:
+
+  >>> import zope.component
+  >>> import gocept.country.interfaces
+  >>> def get_country(context):
+  ...     return context.country
+  >>> zope.component.provideAdapter(
+  ...    get_country, (IAddress, ), gocept.country.interfaces.ICountry)
+
+  >>> gocept.country.interfaces.ICountry(address).name
+  u'Germany'
+
+So the source contains only the country subdivisions belonging to the
+country:
+
+  >>> len(list(iter(gocept.country.contextual_subdivisions(address))))
+  16
+  >>> [x.name
+  ...  for x in iter(gocept.country.contextual_subdivisions(address))][1:3]
+  [u'Bayern', u'Bremen']
+
+Changing the country changes also the subdivisions:
+
+  >>> address.country = gocept.country.db.Country('CH')
+  >>> len(list(iter(gocept.country.contextual_subdivisions(address))))
+  26
+  >>> [x.name
+  ...  for x in iter(gocept.country.contextual_subdivisions(address))]
+  [u'Aargau', u'Appenzell Innerrhoden', ...]
+
+If the country is not set leads to no subdivisions:
+
+  >>> address.country = None
+  >>> len(list(iter(gocept.country.contextual_subdivisions(address))))
+  0
+  >>> list(iter(gocept.country.contextual_subdivisions(address)))
+  []
 
 
 ISO 15924 Scripts

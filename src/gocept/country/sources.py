@@ -1,6 +1,14 @@
-import zc.sourcefactory.basic
-import pycountry
+# -*- coding: latin-1 -*-
+# Copyright (c) 2008 gocept gmbh & co. kg
+# See also LICENSE.txt
+# $Id$
 
+import pycountry
+import zc.sourcefactory.basic
+import zc.sourcefactory.contextual
+import zope.component
+
+import gocept.country.interfaces
 import gocept.country.db
 
 
@@ -44,6 +52,30 @@ class SubdivisionSource(BasicSource):
     def getToken(self, value):
         return value.code
 
+
+class ContextualSubdivisionSource(
+    zc.sourcefactory.contextual.BasicContextualSourceFactory):
+    """Contextual source for the pycountry country subdivisions."""
+
+    def __contains__(self, item, context):
+        country = zope.component.queryMultiAdapter(
+            (context, ), gocept.country.interfaces.ICountry)
+        if not country:
+            return False
+        return item.country_code == country.alpha2
+
+    def getTitle(self, value, context):
+        return value.name
+
+    def getValues(self, context):
+        for subdivision in pycountry.subdivisions:
+            if self.__contains__(subdivision, context):
+                yield gocept.country.db.Subdivision(subdivision.code)
+
+    def getToken(self, value, context):
+        return value.code
+
+
 class ScriptSource(BasicSource):
     """Source for the pycountry scripts."""
 
@@ -82,6 +114,7 @@ class LanguageSource(BasicSource):
 
 countries = CountrySource()
 subdivisions = SubdivisionSource()
+contextual_subdivisions = ContextualSubdivisionSource()
 scripts = ScriptSource()
 currencies = CurrencySource()
 languages = LanguageSource()
