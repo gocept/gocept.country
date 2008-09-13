@@ -57,22 +57,22 @@ class ContextualSubdivisionSource(
     zc.sourcefactory.contextual.BasicContextualSourceFactory):
     """Contextual source for the pycountry country subdivisions."""
 
-    def __contains__(self, item, context):
+    def __contains__(self, context, item):
         country = zope.component.queryMultiAdapter(
             (context, ), gocept.country.interfaces.ICountry)
         if not country:
             return False
         return item.country_code == country.alpha2
 
-    def getTitle(self, value, context):
+    def getTitle(self, context, value):
         return value.name
 
     def getValues(self, context):
         for subdivision in pycountry.subdivisions:
-            if self.__contains__(subdivision, context):
+            if self.__contains__(context, subdivision):
                 yield gocept.country.db.Subdivision(subdivision.code)
 
-    def getToken(self, value, context):
+    def getToken(self, context, value):
         return value.code
 
 

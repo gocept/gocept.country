@@ -4,7 +4,8 @@ Changes
 0.7 (unreleased)
 ----------------
 
--
+- Bugfix in countextual subdivision source: parameters of some methods
+  where in wrong order.
 
 0.6 (2008-09-12)
 ----------------

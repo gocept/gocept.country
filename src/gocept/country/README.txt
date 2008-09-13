@@ -179,6 +179,13 @@ Changing the country changes also the subdivisions:
   >>> [x.name
   ...  for x in iter(gocept.country.contextual_subdivisions(address))]
   [u'Aargau', u'Appenzell Innerrhoden', ...]
+  >>> [x.code
+  ...  for x in iter(gocept.country.contextual_subdivisions(address))]
+  ['CH-AG', 'CH-AI', ...]
+
+  >>> gocept.country.contextual_subdivisions.factory.getTitle(
+  ...     address, gocept.country.db.Subdivision('CH-AG'))
+  u'Aargau'
 
 If the country is not set leads to no subdivisions:
 
