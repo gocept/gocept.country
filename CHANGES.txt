@@ -6,6 +6,13 @@ Changes
 
 - 
 
+0.6.2 (2008-10-13)
+------------------
+
+- Added security declarations for token.
+- Bugfix in comparison of db objects, where `isinstance` returns False
+  for objects of the same type
+
 0.6.1 (2008-09-13)
 ------------------
 
