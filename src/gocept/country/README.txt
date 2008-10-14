@@ -340,6 +340,13 @@ Comparing them will get the token for each and compare it:
 
   >>> afghanistan == afghanistan2
   True
+  >>> afghanistan != afghanistan2
+  False
+  >>> afghanistan != germany
+  True
+  >>> afghanistan == germany
+  False
+
 
 Comparing with an instance of another class always returns False:
 

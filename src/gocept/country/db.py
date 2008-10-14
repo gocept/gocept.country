@@ -29,6 +29,13 @@ class Data(object):
             return False
         return self.token == other.token
 
+    def __ne__(self, other):
+        if not other:
+            return True
+        if other.__class__ != self.__class__:
+            return True
+        return self.token != other.token
+
     def __reduce__(self):
         return (self.__class__, (self.token, ))
 

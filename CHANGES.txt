@@ -6,6 +6,11 @@ Changes
 
 - 
 
+0.6.3 (2008-10-14)
+------------------
+
+- Bugfix: added not-equal compare method for db objects
+
 0.6.2 (2008-10-13)
 ------------------
 
