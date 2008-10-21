@@ -29,6 +29,7 @@ setup(
     keywords='country subdivision language currency iso 3166 639 4217 '
              '15924 3166-2 zope',
     zip_safe=False,
+    namespace_packages = ['gocept'],
     classifiers = [
         'Development Status :: 4 - Beta',
         'Environment :: Web Environment',
@@ -42,7 +43,8 @@ setup(
     packages=find_packages('src'),
     include_package_data=True,
     package_dir={'':'src'},
-    install_requires=['pycountry',
+    install_requires=['setuptools',
+                      'pycountry',
                       'zope.i18nmessageid',
                       'zc.sourcefactory>=0.3.3',
                       'zope.deferredimport',
