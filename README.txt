@@ -7,3 +7,5 @@ field to provide a full list of iso 3166 country codes.
 
 For more information about the database please refer to the
 `pycountry product <http://pypi.python.org/pypi/pycountry/>`_.
+
+.. contents::
