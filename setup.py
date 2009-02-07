@@ -52,6 +52,6 @@ setup(
     extras_require = dict(
         test=['zope.testing',
               'zope.app.testing',
-              'zope.app.component',
+              'zope.security',
               'zope.schema'])
     )
