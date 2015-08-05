@@ -1,15 +1,10 @@
 # -*- coding: latin-1 -*-
-# Copyright (c) 2008-2009 gocept gmbh & co. kg
-# See also LICENSE.txt
-# $Id$
-
+import gocept.country.db
+import gocept.country.interfaces
 import pycountry
 import zc.sourcefactory.basic
 import zc.sourcefactory.contextual
 import zope.component
-
-import gocept.country.interfaces
-import gocept.country.db
 
 
 class BasicSource(zc.sourcefactory.basic.BasicSourceFactory):
@@ -54,7 +49,7 @@ class SubdivisionSource(BasicSource):
 
 
 class ContextualSubdivisionSource(
-    zc.sourcefactory.contextual.BasicContextualSourceFactory):
+        zc.sourcefactory.contextual.BasicContextualSourceFactory):
     """Contextual source for the pycountry country subdivisions."""
 
     def __contains__(self, context, item):
