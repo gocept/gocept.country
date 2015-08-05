@@ -96,4 +96,4 @@ class Language(Data):
 
     @property
     def _obj(self):
-        return pycountry.languages.get(bibliographic=self.token)
+        return pycountry.languages.get(iso639_3_code=self.token)

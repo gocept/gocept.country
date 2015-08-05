@@ -4,7 +4,8 @@ Changes
 0.6.6 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Update to ``pycountry 1.12`` thus adding support for ISO 639 3, dropping the
+  old ISO 639 support.
 
 
 0.6.5 (2015-08-05)

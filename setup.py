@@ -38,7 +38,7 @@ setup(
     include_package_data=True,
     package_dir={'': 'src'},
     install_requires=['setuptools',
-                      'pycountry',
+                      'pycountry >= 1.12',
                       'zope.i18nmessageid',
                       'zc.sourcefactory>=0.3.3',
                       'zope.deferredimport'],

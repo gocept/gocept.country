@@ -101,7 +101,7 @@ class LanguageSource(BasicSource):
     def getValues(self):
         for language in pycountry.languages:
             if language in self:
-                yield gocept.country.db.Language(language.bibliographic)
+                yield gocept.country.db.Language(language.iso639_3_code)
 
     def getToken(self, value):
         return value.bibliographic

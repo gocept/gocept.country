@@ -272,26 +272,21 @@ Languages are similar, too:
 
   >>> languages = iter(languages_field.source)
 
-  >>> afar = languages.next()
-  >>> afar.name
-  u'Afar'
+  >>> ghotuo = languages.next()
+  >>> ghotuo.name
+  u'Ghotuo'
 
-  >>> abkhazian = languages.next()
-  >>> abkhazian.name
-  u'Abkhazian'
+  >>> alumu_tesu = languages.next()
+  >>> alumu_tesu.name
+  u'Alumu-Tesu'
 
 
-Please note, that the result items are sorted by *bibliographic*. Please also
-note, that you can provide alpha2 and terminology codes and names to smaller
-the amount of result items, too.
+Please note, that the result items are sorted by *iso639_3_code*. Please also
+note, that you can provide names to smaller the amount of result items, too.
 
   >>> len(list(gocept.country.LanguageSource())) > 480
   True
-  >>> len(list(gocept.country.LanguageSource(alpha2=['an', 'en', 'de'])))
-  3
-  >>> len(list(gocept.country.LanguageSource(bibliographic=['eng', 'ger'])))
-  2
-  >>> len(list(gocept.country.LanguageSource(terminology=['arg', 'abk'])))
+  >>> len(list(gocept.country.LanguageSource(iso639_3_code=['eng', 'deu'])))
   2
   >>> len(list(gocept.country.LanguageSource(name=['English', 'German'])))
   2
