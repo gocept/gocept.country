@@ -14,7 +14,7 @@ setup(
     description='Zope 3 sources for pycountry databases',
     long_description=(read('COPYRIGHT.txt')
                       + '\n\n' +
-                      + read('README.txt')
+                      read('README.txt')
                       + '\n\n' +
                       read('src', 'gocept', 'country', 'README.txt')
                       + '\n\n' +
