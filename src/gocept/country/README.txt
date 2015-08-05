@@ -44,13 +44,13 @@ Calling the next() method again returns the next country from the source:
 There are all information available, which you can get from pycountry:
 
   >>> afghanistan.alpha2
-  'AF'
+  u'AF'
   >>> afghanistan.alpha3
-  'AFG'
+  u'AFG'
   >>> afghanistan.numeric
-  '004'
+  u'004'
   >>> afghanistan.official_name
-  'Islamic Republic of Afghanistan'
+  u'Islamic Republic of Afghanistan'
 
 
 To smaller the amount of results you can provide a list or tuple of countries
@@ -71,8 +71,8 @@ Please note, that the result items are sorted by *alpha2* code. Please also
 note, that you can provide alpha3 and numeric codes and names resp.
 official_names to smaller the amount of result items, too:
 
-  >>> len(list(gocept.country.CountrySource()))
-  246
+  >>> len(list(gocept.country.CountrySource())) > 200
+  True
   >>> len(list(gocept.country.CountrySource(alpha2=['DE', 'US', 'GB'])))
   3
   >>> len(list(gocept.country.CountrySource(alpha3=['DEU', 'USA'])))
@@ -106,25 +106,25 @@ Country subdivisions are similar to countries:
   >>> la_vella.name
   u'Andorra la Vella'
   >>> la_vella.code
-  'AD-07'
+  u'AD-07'
 
   >>> canillo = subdivisions.next()
   >>> canillo.name
   u'Canillo'
   >>> canillo.code
-  'AD-02'
+  u'AD-02'
 
 Please note, that the result items are sorted by their *code*. Please
 also note, that you can provide names and numeric codes to smaller the
 amount of result items, too.
 
-  >>> len(list(gocept.country.SubdivisionSource()))
-  4548
+  >>> len(list(gocept.country.SubdivisionSource())) > 4000
+  True
   >>> len(list(gocept.country.SubdivisionSource(code=['DE-ST', 'US-WA'])))
   2
   >>> len(list(gocept.country.SubdivisionSource(country_code=['DE'])))
   16
-  >>> [x.name 
+  >>> [x.name
   ...  for x in gocept.country.SubdivisionSource(country_code=['DE'])][1:3]
   [u'Bayern', u'Bremen']
   >>> len(list(gocept.country.SubdivisionSource(
@@ -141,7 +141,7 @@ depends on a country. Let's set up a context object first:
   >>> class IAddress(zope.interface.Interface):
   ...     country = zope.interface.Attribute("The country of the address.")
   ...     subdivision = zope.schema.Choice(
-  ...         title=u'Country subdivisions', 
+  ...         title=u'Country subdivisions',
   ...         source=gocept.country.contextual_subdivisions)
 
   >>> class Address(object):
@@ -181,7 +181,7 @@ Changing the country changes also the subdivisions:
   [u'Aargau', u'Appenzell Innerrhoden', ...]
   >>> [x.code
   ...  for x in iter(gocept.country.contextual_subdivisions(address))]
-  ['CH-AG', 'CH-AI', ...]
+  [u'CH-AG', u'CH-AI', ...]
 
   >>> gocept.country.contextual_subdivisions.factory.getTitle(
   ...     address, gocept.country.db.Subdivision('CH-AG'))
@@ -208,19 +208,19 @@ Scripts are similar to countries:
 
   >>> arabic = scripts.next()
   >>> arabic.name
-  u'Arabic'
+  u'Afaka'
 
   >>> aramaic = scripts.next()
   >>> aramaic.name
-  u'Imperial Aramaic'
+  u'Caucasian Albanian'
 
 
 Please note, that the result items are sorted by *alpha4* code. Please also
 note, that you can provide names and numeric codes to smaller the amount of
 result items, too.
 
-  >>> len(list(gocept.country.ScriptSource()))
-  131
+  >>> len(list(gocept.country.ScriptSource())) > 130
+  True
   >>> len(list(gocept.country.ScriptSource(alpha4=['Arab', 'Latn'])))
   2
   >>> len(list(gocept.country.ScriptSource(numeric=['215', ])))
@@ -252,8 +252,8 @@ Please note, that the result items are sorted by *letter* code. Please also
 note, that you can provide names and numeric codes to smaller the amount of
 result items, too.
 
-  >>> len(list(gocept.country.CurrencySource()))
-  183
+  >>> len(list(gocept.country.CurrencySource())) > 180
+  True
   >>> len(list(gocept.country.CurrencySource(letter=['ARS', 'AED', 'AFN'])))
   3
   >>> len(list(gocept.country.CurrencySource(numeric=['032', '784'])))
@@ -285,8 +285,8 @@ Please note, that the result items are sorted by *bibliographic*. Please also
 note, that you can provide alpha2 and terminology codes and names to smaller
 the amount of result items, too.
 
-  >>> len(list(gocept.country.LanguageSource()))
-  486
+  >>> len(list(gocept.country.LanguageSource())) > 480
+  True
   >>> len(list(gocept.country.LanguageSource(alpha2=['an', 'en', 'de'])))
   3
   >>> len(list(gocept.country.LanguageSource(bibliographic=['eng', 'ger'])))
@@ -304,9 +304,7 @@ Translations
 First we fetch a specific country:
 
   >>> countries = list(iter(countries_field.source))
-  >>> germany = countries[80]
-  >>> germany.name
-  u'Germany'
+  >>> germany = [x for x in countries if x.name == u'Germany'][0]
 
 
 The i18n translate method translates 'Germany' into german:
