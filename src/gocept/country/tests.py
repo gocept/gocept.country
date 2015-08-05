@@ -1,7 +1,5 @@
 # vim:fileencoding=utf-8
-# $Id$
-"""Test harness for gocept.country."""
-
+import doctest
 import os.path
 
 import zope.testing

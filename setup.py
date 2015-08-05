@@ -1,11 +1,7 @@
 # vim:fileencoding=utf-8
-# $Id$
-"""Setup for country package.
-"""
-
 import os.path
-
 from setuptools import setup, find_packages
+
 
 def read(*rnames):
     return open(os.path.join(os.path.dirname(__file__), *rnames)).read()
@@ -16,15 +12,13 @@ setup(
     author='gocept gmbh & co. kg',
     author_email='mail@gocept.com',
     description='Zope 3 sources for pycountry databases',
-                         + '\n\n' +
-                         read('src', 'gocept', 'country',
-                             'README.txt')
-                         + '\n\n' +
-                         read('CHANGES.txt')
-    ),
     long_description=(read('COPYRIGHT.txt')
                       + '\n\n' +
                       + read('README.txt')
+                      + '\n\n' +
+                      read('src', 'gocept', 'country', 'README.txt')
+                      + '\n\n' +
+                      read('CHANGES.txt')),
     license='ZPL 2.1',
     keywords='country subdivision language currency iso 3166 639 4217 '
              '15924 3166-2 zope',
@@ -42,16 +36,15 @@ setup(
     url='http://pypi.python.org/pypi/gocept.country/',
     packages=find_packages('src'),
     include_package_data=True,
-    package_dir={'':'src'},
+    package_dir={'': 'src'},
     install_requires=['setuptools',
                       'pycountry',
                       'zope.i18nmessageid',
                       'zc.sourcefactory>=0.3.3',
-                      'zope.deferredimport',
-    ],
+                      'zope.deferredimport'],
     extras_require = dict(
         test=['zope.testing',
               'zope.app.testing',
               'zope.security',
               'zope.schema'])
-    )
+)
