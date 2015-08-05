@@ -1,6 +1,4 @@
 # vim:fileencoding=utf-8
-# Copyright (c) 2008-2009 gocept gmbh & co. kg
-# See also LICENSE.txt
 # $Id$
 """Setup for country package.
 """
@@ -15,16 +13,18 @@ def read(*rnames):
 setup(
     name='gocept.country',
     version='0.7dev',
-    author='Sebastian Wehrmann, Christian Theune',
-    author_email='sw@gocept.com',
+    author='gocept gmbh & co. kg',
+    author_email='mail@gocept.com',
     description='Zope 3 sources for pycountry databases',
-    long_description = (read('README.txt')
                          + '\n\n' +
                          read('src', 'gocept', 'country',
                              'README.txt')
                          + '\n\n' +
                          read('CHANGES.txt')
     ),
+    long_description=(read('COPYRIGHT.txt')
+                      + '\n\n' +
+                      + read('README.txt')
     license='ZPL 2.1',
     keywords='country subdivision language currency iso 3166 639 4217 '
              '15924 3166-2 zope',
