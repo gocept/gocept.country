@@ -6,7 +6,7 @@
 import zope.deferredimport
 
 zope.deferredimport.defineFrom(
-    'gocept.country.sources', 
+    'gocept.country.sources',
     'CountrySource',
     'SubdivisionSource',
     'SubdivisionContextualSource',

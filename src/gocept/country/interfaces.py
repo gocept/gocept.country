@@ -5,6 +5,7 @@
 
 import zope.interface
 
+
 class ICountry(zope.interface.Interface):
     """A Country (ISO 3166)."""
 
