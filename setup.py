@@ -14,11 +14,11 @@ setup(
     description='Zope 3 sources for pycountry databases',
     long_description=(read('COPYRIGHT.txt')
                       + '\n\n' +
-                      read('README.txt')
+                      read('README.rst')
                       + '\n\n' +
                       read('src', 'gocept', 'country', 'README.txt')
                       + '\n\n' +
-                      read('CHANGES.txt')),
+                      read('CHANGES.rst')),
     license='ZPL 2.1',
     keywords='country subdivision language currency iso 3166 639 4217 '
              '15924 3166-2 zope',
