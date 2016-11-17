@@ -8,6 +8,7 @@ Changes
 
 - Change testrunner to py.test.
 
+- Require ``pycountry < 16.x`` for now.
 
 1.0 (2015-08-05)
 ----------------
