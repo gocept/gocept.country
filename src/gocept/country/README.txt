@@ -3,8 +3,8 @@ gocept.country
 ==============
 
 
-gocept.country provides Zope 3 sources for the pycountry databases. You can
-use it e.g. to get a zope.schema.Choice field with all iso 3166 countries.
+`gocept.country` provides Zope 3 sources for the pycountry databases. You can
+use it e.g. to get a ``zope.schema.Choice`` field with all ISO 3166 countries.
 
   >>> import gocept.country
   >>> import gocept.country.db
@@ -14,8 +14,9 @@ use it e.g. to get a zope.schema.Choice field with all iso 3166 countries.
 ISO 3166 Countries
 ==================
 
-To get a list of ISO 3166 countries in a webform, you can use the
-zope.schema.Choice field and provide the gocept.country.countries as source:
+To get a list of ISO 3166 countries in a web form, you can use the
+``zope.schema.Choice`` field and provide the gocept.country.countries as
+source:
 
   >>> countries_field = zope.schema.Choice(title=u'Country',
   ...                            source=gocept.country.countries)
@@ -24,8 +25,8 @@ zope.schema.Choice field and provide the gocept.country.countries as source:
   >>> countries = iter(countries_field.source)
 
 
-The gocept.country.countries sourcefactory returns Country objects as values,
-which use the values from pycountry:
+The ``gocept.country.countries`` source factory returns Country objects as
+values, which use the values from pycountry:
 
   >>> aruba = countries.next()
   >>> afghanistan = countries.next()
@@ -35,7 +36,7 @@ which use the values from pycountry:
   u'Afghanistan'
 
 
-Calling the next() method again returns the next country from the source:
+Calling ``next()`` again returns the next country from the source:
 
   >>> angola = countries.next()
   >>> angola.name
@@ -54,7 +55,7 @@ There are all information available, which you can get from pycountry:
   u'Islamic Republic of Afghanistan'
 
 
-To smaller the amount of results you can provide a list or tuple of countries
+To reduce the amount of results you can provide a list or tuple of countries
 you like to have in your source:
 
   >>> countries = gocept.country.CountrySource(alpha_2=['DE', 'US'])
@@ -80,7 +81,7 @@ official_names to reduce the amount of result items, too:
   4
 
 
-Providing codes, which are not present, does not results in an exception but
+Providing codes, which are not present, does not result in an exception but
 in an empty list:
 
   >>> len(list(gocept.country.CountrySource(capital=['Berlin', 'Paris'])))
@@ -89,8 +90,8 @@ in an empty list:
 ISO 3166-2 Country subdivisions
 ===============================
 
-Contextless source
-------------------
+Context free source
+-------------------
 
 Country subdivisions are similar to countries:
 
@@ -113,7 +114,7 @@ Country subdivisions are similar to countries:
   u'AD-03'
 
 Please note, that the result items are sorted by their *code*. Please
-also note, that you can provide names and numeric codes to smaller the
+also note, that you can provide names and numeric codes to reduce the
 amount of result items, too.
 
   >>> len(list(gocept.country.SubdivisionSource())) > 4000
@@ -147,7 +148,7 @@ depends on a country. Let's set up a context object first:
   >>> address.country = gocept.country.db.Country('DE')
 
 The contextual source expects an adapter between the context and
-gocept.country.interfaces.ICountry:
+``gocept.country.interfaces.ICountry`:
 
   >>> import zope.component
   >>> import gocept.country.interfaces
@@ -187,7 +188,7 @@ Changing the country changes also the subdivisions:
   ...     address, gocept.country.db.Subdivision('CH-AG'))
   u'Aargau'
 
-If the country is not set leads to no subdivisions:
+If the country is not set there are no subdivisions:
 
   >>> address.country = None
   >>> len(list(iter(gocept.country.contextual_subdivisions(address))))
@@ -217,7 +218,7 @@ Scripts are similar to countries:
   u'Afak'
 
 
-Please note, that the result items are sorted by *alpha4* code. Please also
+Please note, that the result items are sorted by *alpha_4* code. Please also
 note, that you can provide names and numeric codes to smaller the amount of
 result items, too.
 
@@ -234,7 +235,7 @@ result items, too.
 ISO 4217 Currencies
 ===================
 
-Currencies are, again, similar to the ones before:
+Currencies are similar to the ones before:
 
   >>> currencies_field = zope.schema.Choice(title=u'Currency',
   ...                            source=gocept.country.currencies)
@@ -306,22 +307,22 @@ First we fetch a specific country:
   >>> germany = [x for x in countries if x.name == u'Germany'][0]
 
 
-The i18n translate method translates 'Germany' into german:
+The i18n translate method translates 'Germany' into German:
 
   >>> zope.i18n.translate(germany.name, target_language='de')
   u'Deutschland'
 
 
-Translations are also operating for scripts, currencies and languages.
+There are also translations for scripts, currencies and languages.
 
 
 Comparison
 ==========
 
 
-Countries, scripts, currenties and languages can be compared to equality. To
-test this, we will need another country object afghanistan, which is not the
-*same* object as retrieved before:
+Countries, scripts, currencies and languages can be compared to equality. To
+test this, we will need another country object ``afghanistan``, which is not
+the *same* object as retrieved before:
 
 
   >>> afghanistan = iter(gocept.country.CountrySource(alpha_2=['AF'])).next()
