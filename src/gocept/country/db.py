@@ -56,7 +56,7 @@ class Country(Data):
 
     @property
     def _obj(self):
-        return pycountry.countries.get(alpha2=self.token)
+        return pycountry.countries.get(alpha_2=self.token)
 
 
 class Subdivision(Data):
@@ -76,7 +76,7 @@ class Script(Data):
 
     @property
     def _obj(self):
-        return pycountry.scripts.get(alpha4=self.token)
+        return pycountry.scripts.get(alpha_4=self.token)
 
 
 class Currency(Data):
@@ -86,7 +86,7 @@ class Currency(Data):
 
     @property
     def _obj(self):
-        return pycountry.currencies.get(letter=self.token)
+        return pycountry.currencies.get(alpha_3=self.token)
 
 
 class Language(Data):
@@ -96,4 +96,4 @@ class Language(Data):
 
     @property
     def _obj(self):
-        return pycountry.languages.get(iso639_3_code=self.token)
+        return pycountry.languages.get(alpha_3=self.token)

@@ -30,10 +30,10 @@ class CountrySource(BasicSource):
     def getValues(self):
         for country in pycountry.countries:
             if country in self:
-                yield gocept.country.db.Country(country.alpha2)
+                yield gocept.country.db.Country(country.alpha_2)
 
     def getToken(self, value):
-        return value.alpha2
+        return value.alpha_2
 
 
 class SubdivisionSource(BasicSource):
@@ -57,7 +57,7 @@ class ContextualSubdivisionSource(
             (context, ), gocept.country.interfaces.ICountry)
         if not country:
             return False
-        return item.country_code == country.alpha2
+        return item.country_code == country.alpha_2
 
     def getTitle(self, context, value):
         return value.name
@@ -77,10 +77,10 @@ class ScriptSource(BasicSource):
     def getValues(self):
         for script in pycountry.scripts:
             if script in self:
-                yield gocept.country.db.Script(script.alpha4)
+                yield gocept.country.db.Script(script.alpha_4)
 
     def getToken(self, value):
-        return value.alpha4
+        return value.alpha_4
 
 
 class CurrencySource(BasicSource):
@@ -89,10 +89,10 @@ class CurrencySource(BasicSource):
     def getValues(self):
         for currency in pycountry.currencies:
             if currency in self:
-                yield gocept.country.db.Currency(currency.letter)
+                yield gocept.country.db.Currency(currency.alpha_3)
 
     def getToken(self, value):
-        return value.letter
+        return value.alpha_3
 
 
 class LanguageSource(BasicSource):
@@ -101,10 +101,10 @@ class LanguageSource(BasicSource):
     def getValues(self):
         for language in pycountry.languages:
             if language in self:
-                yield gocept.country.db.Language(language.iso639_3_code)
+                yield gocept.country.db.Language(language.alpha_3)
 
     def getToken(self, value):
-        return value.bibliographic
+        return value.alpha_3
 
 
 countries = CountrySource()

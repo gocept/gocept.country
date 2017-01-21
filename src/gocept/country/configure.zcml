@@ -5,7 +5,7 @@
   <include package="zope.i18n" file="meta.zcml" />
 
   <class class=".db.Country">
-    <allow attributes="token name alpha2" />
+    <allow attributes="token name alpha_2" />
   </class>
 
   <class class=".db.Subdivision">
@@ -13,15 +13,15 @@
   </class>
 
   <class class=".db.Script">
-    <allow attributes="token name alpha4" />
+    <allow attributes="token name alpha_4" />
   </class>
 
   <class class=".db.Currency">
-    <allow attributes="token name letter" />
+    <allow attributes="token name alpha_3" />
   </class>
 
   <class class=".db.Language">
-    <allow attributes="token name bibliographic" />
+    <allow attributes="token name alpha_3" />
   </class>
 
   <configure package="pycountry">

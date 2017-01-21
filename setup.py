@@ -8,7 +8,7 @@ def read(*rnames):
 
 setup(
     name='gocept.country',
-    version='1.1.dev0',
+    version='2.0.dev0',
     author='gocept gmbh & co. kg',
     author_email='mail@gocept.com',
     description='Zope 3 sources for pycountry databases',
@@ -41,7 +41,7 @@ setup(
     include_package_data=True,
     package_dir={'': 'src'},
     install_requires=['setuptools',
-                      'pycountry >= 1.12, < 16.0',
+                      'pycountry >= 16.0',
                       'zope.i18nmessageid',
                       'zc.sourcefactory>=0.3.3',
                       'zope.deferredimport'],

@@ -27,6 +27,7 @@ zope.schema.Choice field and provide the gocept.country.countries as source:
 The gocept.country.countries sourcefactory returns Country objects as values,
 which use the values from pycountry:
 
+  >>> aruba = countries.next()
   >>> afghanistan = countries.next()
   >>> afghanistan
   <gocept.country.db.Country object at 0x...>
@@ -36,16 +37,16 @@ which use the values from pycountry:
 
 Calling the next() method again returns the next country from the source:
 
-  >>> islands = countries.next()
-  >>> islands.name
-  u'\xc5land Islands'
+  >>> angola = countries.next()
+  >>> angola.name
+  u'Angola'
 
 
 There are all information available, which you can get from pycountry:
 
-  >>> afghanistan.alpha2
+  >>> afghanistan.alpha_2
   u'AF'
-  >>> afghanistan.alpha3
+  >>> afghanistan.alpha_3
   u'AFG'
   >>> afghanistan.numeric
   u'004'
@@ -56,26 +57,21 @@ There are all information available, which you can get from pycountry:
 To smaller the amount of results you can provide a list or tuple of countries
 you like to have in your source:
 
-  >>> countries = iter(gocept.country.CountrySource(alpha2=['DE', 'US']))
-  >>> countries.next().name
-  u'Germany'
-  >>> countries.next().name
-  u'United States'
-  >>> countries.next().name
-  Traceback (most recent call last):
-  ...
-  StopIteration
+  >>> countries = gocept.country.CountrySource(alpha_2=['DE', 'US'])
+  >>> [countries.factory.getTitle(x) for x in countries]
+  [u'Germany', u'United States']
+  >>> [countries.factory.getToken(x) for x in countries]
+  [u'DE', u'US']
 
-
-Please note, that the result items are sorted by *alpha2* code. Please also
-note, that you can provide alpha3 and numeric codes and names resp.
-official_names to smaller the amount of result items, too:
+Please note, that the result items are sorted by *alpha_2* code. Please also
+note, that you can provide alpha_3 and numeric codes and names resp.
+official_names to reduce the amount of result items, too:
 
   >>> len(list(gocept.country.CountrySource())) > 200
   True
-  >>> len(list(gocept.country.CountrySource(alpha2=['DE', 'US', 'GB'])))
+  >>> len(list(gocept.country.CountrySource(alpha_2=['DE', 'US', 'GB'])))
   3
-  >>> len(list(gocept.country.CountrySource(alpha3=['DEU', 'USA'])))
+  >>> len(list(gocept.country.CountrySource(alpha_3=['DEU', 'USA'])))
   2
   >>> len(list(gocept.country.CountrySource(numeric=['276', ])))
   1
@@ -102,17 +98,17 @@ Country subdivisions are similar to countries:
   ...     title=u'Country subdivisions', source=gocept.country.subdivisions)
   >>> subdivisions = iter(subdivisions_field.source)
 
-  >>> la_vella = subdivisions.next()
-  >>> la_vella.name
-  u'Andorra la Vella'
-  >>> la_vella.code
-  u'AD-07'
-
   >>> canillo = subdivisions.next()
   >>> canillo.name
   u'Canillo'
   >>> canillo.code
   u'AD-02'
+
+  >>> encamp = subdivisions.next()
+  >>> encamp.name
+  u'Encamp'
+  >>> encamp.code
+  u'AD-03'
 
 Please note, that the result items are sorted by their *code*. Please
 also note, that you can provide names and numeric codes to smaller the
@@ -126,9 +122,8 @@ amount of result items, too.
   16
   >>> [x.name
   ...  for x in gocept.country.SubdivisionSource(country_code=['DE'])][1:3]
-  [u'Bayern', u'Bremen']
-  >>> len(list(gocept.country.SubdivisionSource(
-  ...     name=[u'Bayern', u'Bremen'])))
+  [u'Berlin', u'Baden-W\xfcrttemberg']
+  >>> len(list(gocept.country.SubdivisionSource(name=[u'Bayern', u'Bremen'])))
   2
 
 Contextual source
@@ -169,7 +164,7 @@ country:
   16
   >>> [x.name
   ...  for x in iter(gocept.country.contextual_subdivisions(address))][1:3]
-  [u'Bayern', u'Bremen']
+  [u'Berlin', u'Baden-W\xfcrttemberg']
 
 Changing the country changes also the subdivisions:
 
@@ -206,13 +201,13 @@ Scripts are similar to countries:
   >>> scripts = iter(scripts_field.source)
 
 
-  >>> arabic = scripts.next()
-  >>> arabic.name
-  u'Afaka'
+  >>> adlam = scripts.next()
+  >>> adlam.name
+  u'Adlam'
 
-  >>> aramaic = scripts.next()
-  >>> aramaic.name
-  u'Caucasian Albanian'
+  >>> afaka = scripts.next()
+  >>> afaka.name
+  u'Afaka'
 
 
 Please note, that the result items are sorted by *alpha4* code. Please also
@@ -221,7 +216,7 @@ result items, too.
 
   >>> len(list(gocept.country.ScriptSource())) > 130
   True
-  >>> len(list(gocept.country.ScriptSource(alpha4=['Arab', 'Latn'])))
+  >>> len(list(gocept.country.ScriptSource(alpha_4=['Arab', 'Latn'])))
   2
   >>> len(list(gocept.country.ScriptSource(numeric=['215', ])))
   1
@@ -248,13 +243,13 @@ Currencies are, again, similar to the ones before:
   u'Afghani'
 
 
-Please note, that the result items are sorted by *letter* code. Please also
-note, that you can provide names and numeric codes to smaller the amount of
+Please note, that the result items are sorted by *alpha_3* code. Please also
+note, that you can provide names and numeric codes to reduce the amount of
 result items, too.
 
-  >>> len(list(gocept.country.CurrencySource())) > 180
+  >>> len(list(gocept.country.CurrencySource())) >= 170
   True
-  >>> len(list(gocept.country.CurrencySource(letter=['ARS', 'AED', 'AFN'])))
+  >>> len(list(gocept.country.CurrencySource(alpha_3=['ARS', 'AED', 'AFN'])))
   3
   >>> len(list(gocept.country.CurrencySource(numeric=['032', '784'])))
   2
@@ -281,12 +276,12 @@ Languages are similar, too:
   u'Alumu-Tesu'
 
 
-Please note, that the result items are sorted by *iso639_3_code*. Please also
-note, that you can provide names to smaller the amount of result items, too.
+Please note, that the result items are sorted by *alpha_3*. Please also
+note, that you can provide names to reduce the amount of result items, too.
 
   >>> len(list(gocept.country.LanguageSource())) > 480
   True
-  >>> len(list(gocept.country.LanguageSource(iso639_3_code=['eng', 'deu'])))
+  >>> len(list(gocept.country.LanguageSource(alpha_3=['eng', 'deu'])))
   2
   >>> len(list(gocept.country.LanguageSource(name=['English', 'German'])))
   2
@@ -320,10 +315,8 @@ test this, we will need another country object afghanistan, which is not the
 *same* object as retrieved before:
 
 
-  >>> countries = iter(countries_field.source)
-  >>> afghanistan = countries.next()
-  >>> countries = iter(countries_field.source)
-  >>> afghanistan2 = countries.next()
+  >>> afghanistan = iter(gocept.country.CountrySource(alpha_2=['AF'])).next()
+  >>> afghanistan2 = iter(gocept.country.CountrySource(alpha_2=['AF'])).next()
 
   >>> str(afghanistan) == str(afghanistan2)
   False

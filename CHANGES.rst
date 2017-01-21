@@ -1,14 +1,15 @@
 Changes
 =======
 
-1.1 (unreleased)
+2.0 (unreleased)
 ----------------
+
+- Update to ``pycountry >= 16.x``.
 
 - Drop support for Python 2.6.
 
 - Change testrunner to py.test.
 
-- Require ``pycountry < 16.x`` for now.
 
 1.0 (2015-08-05)
 ----------------
