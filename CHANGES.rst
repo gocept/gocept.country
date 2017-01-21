@@ -8,6 +8,8 @@ Changes
 
 - Drop support for Python 2.6.
 
+- Bring test coverage to 100 %.
+
 - Change testrunner to py.test.
 
 

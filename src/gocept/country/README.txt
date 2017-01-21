@@ -109,6 +109,8 @@ Country subdivisions are similar to countries:
   u'Encamp'
   >>> encamp.code
   u'AD-03'
+  >>> gocept.country.subdivisions.factory.getToken(encamp)
+  u'AD-03'
 
 Please note, that the result items are sorted by their *code*. Please
 also note, that you can provide names and numeric codes to smaller the
@@ -177,6 +179,9 @@ Changing the country changes also the subdivisions:
   >>> [x.code
   ...  for x in iter(gocept.country.contextual_subdivisions(address))]
   [u'CH-AG', u'CH-AI', ...]
+  >>> [gocept.country.contextual_subdivisions.factory.getToken(address, x)
+  ...  for x in iter(gocept.country.contextual_subdivisions(address))]
+  [u'CH-AG', u'CH-AI', ...]
 
   >>> gocept.country.contextual_subdivisions.factory.getTitle(
   ...     address, gocept.country.db.Subdivision('CH-AG'))
@@ -208,6 +213,8 @@ Scripts are similar to countries:
   >>> afaka = scripts.next()
   >>> afaka.name
   u'Afaka'
+  >>> gocept.country.scripts.factory.getToken(afaka)
+  u'Afak'
 
 
 Please note, that the result items are sorted by *alpha4* code. Please also
@@ -241,7 +248,8 @@ Currencies are, again, similar to the ones before:
   >>> afghani = currencies.next()
   >>> afghani.name
   u'Afghani'
-
+  >>> gocept.country.currencies.factory.getToken(afghani)
+  u'AFN'
 
 Please note, that the result items are sorted by *alpha_3* code. Please also
 note, that you can provide names and numeric codes to reduce the amount of
@@ -274,7 +282,8 @@ Languages are similar, too:
   >>> alumu_tesu = languages.next()
   >>> alumu_tesu.name
   u'Alumu-Tesu'
-
+  >>> gocept.country.languages.factory.getToken(alumu_tesu)
+  u'aab'
 
 Please note, that the result items are sorted by *alpha_3*. Please also
 note, that you can provide names to reduce the amount of result items, too.
@@ -338,8 +347,12 @@ Comparing with an instance of another class always returns False:
 
   >>> afghanistan == None
   False
+  >>> afghanistan != None
+  True
   >>> afghanistan == object()
   False
+  >>> afghanistan != object()
+  True
 
 
 Pickling and unpickling

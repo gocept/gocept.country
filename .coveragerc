@@ -8,6 +8,7 @@ omit = */interfaces.py
        */interfaces/*
        */tests.py
        */tests/*
+       src/gocept/__init__.py
 
 [html]
 directory = coverage-report
