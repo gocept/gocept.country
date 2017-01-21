@@ -148,7 +148,7 @@ depends on a country. Let's set up a context object first:
   >>> address.country = gocept.country.db.Country('DE')
 
 The contextual source expects an adapter between the context and
-``gocept.country.interfaces.ICountry`:
+``gocept.country.interfaces.ICountry``:
 
   >>> import zope.component
   >>> import gocept.country.interfaces
