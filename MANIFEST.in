@@ -1,0 +1,20 @@
+include *.rst
+include *.txt
+
+include .coveragerc
+exclude .coveragerc
+
+include bootstrap.py
+exclude bootstrap.py
+
+include buildout.cfg
+exclude buildout.cfg
+
+include pytest.ini
+exclude pytest.ini
+
+include MANIFEST.in
+exclude MANIFEST.in
+
+recursive-include src *.txt
+recursive-include src *.zcml
