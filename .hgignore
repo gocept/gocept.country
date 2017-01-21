@@ -8,3 +8,4 @@ syntax: glob
 bin
 develop-eggs
 parts
+coverage-report/
