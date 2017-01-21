@@ -4,7 +4,9 @@ from setuptools import setup, find_packages
 
 
 def read(*rnames):
-    return open(os.path.join(os.path.dirname(__file__), *rnames)).read()
+    """Read a file from a path."""
+    with open(os.path.join(os.curdir, *rnames)) as f:
+        return f.read()
 
 setup(
     name='gocept.country',
@@ -12,19 +14,17 @@ setup(
     author='gocept gmbh & co. kg',
     author_email='mail@gocept.com',
     description='Zope 3 sources for pycountry databases',
-    long_description=(read('COPYRIGHT.txt')
-                      + '\n\n' +
-                      read('README.rst')
-                      + '\n\n' +
-                      read('src', 'gocept', 'country', 'README.txt')
-                      + '\n\n' +
-                      read('CHANGES.rst')),
+    long_description='\n\n'.join([
+        read('COPYRIGHT.txt'),
+        read('README.rst'),
+        read('src', 'gocept', 'country', 'README.txt'),
+        read('CHANGES.rst')]),
     license='ZPL 2.1',
     keywords='country subdivision language currency iso 3166 639 4217 '
              '15924 3166-2 zope',
     zip_safe=False,
-    namespace_packages = ['gocept'],
-    classifiers = [
+    namespace_packages=['gocept'],
+    classifiers=[
         'Development Status :: 4 - Beta',
         'Environment :: Web Environment',
         'Intended Audience :: Developers',
@@ -45,7 +45,7 @@ setup(
                       'zope.i18nmessageid',
                       'zc.sourcefactory>=0.3.3',
                       'zope.deferredimport'],
-    extras_require = dict(
+    extras_require=dict(
         test=['zope.testing',
               'zope.app.testing',
               'zope.security',
