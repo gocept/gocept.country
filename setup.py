@@ -21,11 +21,11 @@ setup(
         read('CHANGES.rst')]),
     license='ZPL 2.1',
     keywords='country subdivision language currency iso 3166 639 4217 '
-             '15924 3166-2 zope',
+             '15924 3166-2 zope pycountry',
     zip_safe=False,
     namespace_packages=['gocept'],
     classifiers=[
-        'Development Status :: 4 - Beta',
+        'Development Status :: 5 - Production/Stable',
         'Environment :: Web Environment',
         'Intended Audience :: Developers',
         'License :: OSI Approved',
