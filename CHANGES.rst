@@ -1,7 +1,7 @@
 Changes
 =======
 
-2.0 (unreleased)
+2.0 (2017-01-21)
 ----------------
 
 - Update to ``pycountry >= 16.x``.
