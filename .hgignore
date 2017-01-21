@@ -5,7 +5,7 @@ syntax: glob
 .cache
 .coverage
 .installed.cfg
-bin
-develop-eggs
-parts
+bin/
 coverage-report/
+develop-eggs/
+parts/
