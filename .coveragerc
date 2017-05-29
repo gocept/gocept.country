@@ -4,11 +4,7 @@ source = gocept.country
 
 [report]
 precision = 2
-omit = */interfaces.py
-       */interfaces/*
-       */tests.py
-       */tests/*
-       src/gocept/__init__.py
+omit = src/gocept/__init__.py
 
 [html]
 directory = test-report
