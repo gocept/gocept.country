@@ -6,7 +6,10 @@ syntax: glob
 .cache
 .coverage
 .installed.cfg
+.tox/
 bin/
 coverage-report/
+coverage.xml
 develop-eggs/
 parts/
+test-report/

@@ -11,4 +11,4 @@ omit = */interfaces.py
        src/gocept/__init__.py
 
 [html]
-directory = coverage-report
+directory = test-report
