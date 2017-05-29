@@ -1,0 +1,10 @@
+[run]
+branch = True
+source = gocept.country
+
+[report]
+precision = 2
+omit = src/gocept/__init__.py
+
+[html]
+directory = test-report

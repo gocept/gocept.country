@@ -1,0 +1,30 @@
+<configure
+  xmlns="http://namespaces.zope.org/zope"
+  xmlns:i18n="http://namespaces.zope.org/i18n">
+
+  <include package="zope.i18n" file="meta.zcml" />
+
+  <class class=".db.Country">
+    <allow attributes="token name alpha_2" />
+  </class>
+
+  <class class=".db.Subdivision">
+    <allow attributes="token name code" />
+  </class>
+
+  <class class=".db.Script">
+    <allow attributes="token name alpha_4" />
+  </class>
+
+  <class class=".db.Currency">
+    <allow attributes="token name alpha_3" />
+  </class>
+
+  <class class=".db.Language">
+    <allow attributes="token name alpha_3" />
+  </class>
+
+  <configure package="pycountry">
+    <i18n:registerTranslations directory="locales" />
+  </configure>
+</configure>
