@@ -1,7 +1,6 @@
 # vim:fileencoding=utf-8
 import doctest
 import os.path
-import unittest
 import zope.app.testing.functional
 import zope.testing
 
@@ -11,9 +10,7 @@ layer = zope.app.testing.functional.ZCMLLayer(
 
 
 def test_suite():
-    suite = unittest.TestSuite()
-    test = zope.app.testing.functional.FunctionalDocFileSuite(
+    suite = zope.app.testing.functional.FunctionalDocFileSuite(
         'README.txt', optionflags=doctest.ELLIPSIS)
-    test.layer = layer
-    suite.addTest(test)
+    suite.layer = layer
     return suite
