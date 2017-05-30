@@ -47,7 +47,7 @@ setup(
                       'zope.deferredimport'],
     extras_require=dict(
         test=['zope.testing',
-              'zope.app.testing',
+              'zope.app.wsgi[testlayer]',
               'zope.security',
               'zope.schema'])
 )

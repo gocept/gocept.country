@@ -4,7 +4,7 @@ Changes
 2.1 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- Replace test dependency on `zope.app.testing` by `zope.app.wsgi[testlayer]`.
 
 
 2.0 (2017-01-21)
