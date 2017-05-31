@@ -4,6 +4,8 @@ Changes
 2.1 (unreleased)
 ----------------
 
+- Support Python 3.4 up to 3.6, PyPy and PyPy3.
+
 - Replace test dependency on `zope.app.testing` by `zope.app.wsgi[testlayer]`.
 
 
