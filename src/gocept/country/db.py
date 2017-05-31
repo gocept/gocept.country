@@ -42,15 +42,17 @@ class Data(object):
     def __getattr__(self, name):
         return getattr(self._obj, name)
 
+    def __hash__(self):
+        return hash(self.token)
+
     @property
     def name(self):
         return self._msg(self._obj.name)
 
 
+@zope.interface.implementer(gocept.country.interfaces.ICountry)
 class Country(Data):
     """Provides access to pycountry countries (ISO 3166)."""
-
-    zope.interface.implements(gocept.country.interfaces.ICountry)
 
     _msg = iso3166msg
 

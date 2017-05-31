@@ -28,41 +28,41 @@ source:
 The ``gocept.country.countries`` source factory returns Country objects as
 values, which use the values from pycountry:
 
-  >>> aruba = countries.next()
-  >>> afghanistan = countries.next()
+  >>> aruba = next(countries)
+  >>> afghanistan = next(countries)
   >>> afghanistan
   <gocept.country.db.Country object at 0x...>
-  >>> afghanistan.name
-  u'Afghanistan'
+  >>> print(afghanistan.name)
+  Afghanistan
 
 
 Calling ``next()`` again returns the next country from the source:
 
-  >>> angola = countries.next()
-  >>> angola.name
-  u'Angola'
+  >>> angola = next(countries)
+  >>> print(angola.name)
+  Angola
 
 
 There are all information available, which you can get from pycountry:
 
-  >>> afghanistan.alpha_2
-  u'AF'
-  >>> afghanistan.alpha_3
-  u'AFG'
-  >>> afghanistan.numeric
-  u'004'
-  >>> afghanistan.official_name
-  u'Islamic Republic of Afghanistan'
+  >>> print(afghanistan.alpha_2)
+  AF
+  >>> print(afghanistan.alpha_3)
+  AFG
+  >>> print(afghanistan.numeric)
+  004
+  >>> print(afghanistan.official_name)
+  Islamic Republic of Afghanistan
 
 
 To reduce the amount of results you can provide a list or tuple of countries
 you like to have in your source:
 
   >>> countries = gocept.country.CountrySource(alpha_2=['DE', 'US'])
-  >>> [countries.factory.getTitle(x) for x in countries]
-  [u'Germany', u'United States']
-  >>> [countries.factory.getToken(x) for x in countries]
-  [u'DE', u'US']
+  >>> print(*[countries.factory.getTitle(x) for x in countries], sep=', ')
+  Germany, United States
+  >>> print(*[countries.factory.getToken(x) for x in countries], sep=', ')
+  DE, US
 
 Please note, that the result items are sorted by *alpha_2* code. Please also
 note, that you can provide alpha_3 and numeric codes and names resp.
@@ -99,19 +99,19 @@ Country subdivisions are similar to countries:
   ...     title=u'Country subdivisions', source=gocept.country.subdivisions)
   >>> subdivisions = iter(subdivisions_field.source)
 
-  >>> canillo = subdivisions.next()
-  >>> canillo.name
-  u'Canillo'
-  >>> canillo.code
-  u'AD-02'
+  >>> canillo = next(subdivisions)
+  >>> print(canillo.name)
+  Canillo
+  >>> print(canillo.code)
+  AD-02
 
-  >>> encamp = subdivisions.next()
-  >>> encamp.name
-  u'Encamp'
-  >>> encamp.code
-  u'AD-03'
-  >>> gocept.country.subdivisions.factory.getToken(encamp)
-  u'AD-03'
+  >>> encamp = next(subdivisions)
+  >>> print(encamp.name)
+  Encamp
+  >>> print(encamp.code)
+  AD-03
+  >>> print(gocept.country.subdivisions.factory.getToken(encamp))
+  AD-03
 
 Please note, that the result items are sorted by their *code*. Please
 also note, that you can provide names and numeric codes to reduce the
@@ -123,9 +123,10 @@ amount of result items, too.
   2
   >>> len(list(gocept.country.SubdivisionSource(country_code=['DE'])))
   16
-  >>> [x.name
-  ...  for x in gocept.country.SubdivisionSource(country_code=['DE'])][1:3]
-  [u'Berlin', u'Baden-W\xfcrttemberg']
+  >>> print(*[x.name
+  ...         for x in gocept.country.SubdivisionSource(country_code=['DE'])][3:5],
+  ...       sep=', ')
+  Bayern, Bremen
   >>> len(list(gocept.country.SubdivisionSource(name=[u'Bayern', u'Bremen'])))
   2
 
@@ -142,8 +143,9 @@ depends on a country. Let's set up a context object first:
   ...         title=u'Country subdivisions',
   ...         source=gocept.country.contextual_subdivisions)
 
-  >>> class Address(object):
-  ...     zope.interface.implements(IAddress)
+  >>> @zope.interface.implementer(IAddress)
+  ... class Address(object):
+  ...     pass
   >>> address = Address()
   >>> address.country = gocept.country.db.Country('DE')
 
@@ -157,36 +159,40 @@ The contextual source expects an adapter between the context and
   >>> zope.component.provideAdapter(
   ...    get_country, (IAddress, ), gocept.country.interfaces.ICountry)
 
-  >>> gocept.country.interfaces.ICountry(address).name
-  u'Germany'
+  >>> print(gocept.country.interfaces.ICountry(address).name)
+  Germany
 
 So the source contains only the country subdivisions belonging to the
 country:
 
   >>> len(list(iter(gocept.country.contextual_subdivisions(address))))
   16
-  >>> [x.name
-  ...  for x in iter(gocept.country.contextual_subdivisions(address))][1:3]
-  [u'Berlin', u'Baden-W\xfcrttemberg']
+  >>> print(*[x.name
+  ...         for x in iter(gocept.country.contextual_subdivisions(address))][3:5],
+  ...       sep=', ')
+  Bayern, Bremen
 
 Changing the country changes also the subdivisions:
 
   >>> address.country = gocept.country.db.Country('CH')
   >>> len(list(iter(gocept.country.contextual_subdivisions(address))))
   26
-  >>> [x.name
-  ...  for x in iter(gocept.country.contextual_subdivisions(address))]
-  [u'Aargau', u'Appenzell Innerrhoden', ...]
-  >>> [x.code
-  ...  for x in iter(gocept.country.contextual_subdivisions(address))]
-  [u'CH-AG', u'CH-AI', ...]
-  >>> [gocept.country.contextual_subdivisions.factory.getToken(address, x)
-  ...  for x in iter(gocept.country.contextual_subdivisions(address))]
-  [u'CH-AG', u'CH-AI', ...]
+  >>> print(*[x.name
+  ...         for x in iter(gocept.country.contextual_subdivisions(address))],
+  ...       sep=', ')
+  Aargau, Appenzell Innerrhoden, ...
+  >>> print(*[x.code
+  ...         for x in iter(gocept.country.contextual_subdivisions(address))],
+  ...       sep=', ')
+  CH-AG, CH-AI, ...
+  >>> print(*[gocept.country.contextual_subdivisions.factory.getToken(address, x)
+  ...         for x in iter(gocept.country.contextual_subdivisions(address))],
+  ...       sep=', ')
+  CH-AG, CH-AI, ...
 
-  >>> gocept.country.contextual_subdivisions.factory.getTitle(
-  ...     address, gocept.country.db.Subdivision('CH-AG'))
-  u'Aargau'
+  >>> print(gocept.country.contextual_subdivisions.factory.getTitle(
+  ...     address, gocept.country.db.Subdivision('CH-AG')))
+  Aargau
 
 If the country is not set there are no subdivisions:
 
@@ -207,15 +213,15 @@ Scripts are similar to countries:
   >>> scripts = iter(scripts_field.source)
 
 
-  >>> adlam = scripts.next()
-  >>> adlam.name
-  u'Adlam'
+  >>> adlam = next(scripts)
+  >>> print(adlam.name)
+  Adlam
 
-  >>> afaka = scripts.next()
-  >>> afaka.name
-  u'Afaka'
-  >>> gocept.country.scripts.factory.getToken(afaka)
-  u'Afak'
+  >>> afaka = next(scripts)
+  >>> print(afaka.name)
+  Afaka
+  >>> print(gocept.country.scripts.factory.getToken(afaka))
+  Afak
 
 
 Please note, that the result items are sorted by *alpha_4* code. Please also
@@ -242,15 +248,15 @@ Currencies are similar to the ones before:
 
   >>> currencies = iter(currencies_field.source)
 
-  >>> dirham = currencies.next()
-  >>> dirham.name
-  u'UAE Dirham'
+  >>> dirham = next(currencies)
+  >>> print(dirham.name)
+  UAE Dirham
 
-  >>> afghani = currencies.next()
-  >>> afghani.name
-  u'Afghani'
-  >>> gocept.country.currencies.factory.getToken(afghani)
-  u'AFN'
+  >>> afghani = next(currencies)
+  >>> print(afghani.name)
+  Afghani
+  >>> print(gocept.country.currencies.factory.getToken(afghani))
+  AFN
 
 Please note, that the result items are sorted by *alpha_3* code. Please also
 note, that you can provide names and numeric codes to reduce the amount of
@@ -276,15 +282,15 @@ Languages are similar, too:
 
   >>> languages = iter(languages_field.source)
 
-  >>> ghotuo = languages.next()
-  >>> ghotuo.name
-  u'Ghotuo'
+  >>> ghotuo = next(languages)
+  >>> print(ghotuo.name)
+  Ghotuo
 
-  >>> alumu_tesu = languages.next()
-  >>> alumu_tesu.name
-  u'Alumu-Tesu'
-  >>> gocept.country.languages.factory.getToken(alumu_tesu)
-  u'aab'
+  >>> alumu_tesu = next(languages)
+  >>> print(alumu_tesu.name)
+  Alumu-Tesu
+  >>> print(gocept.country.languages.factory.getToken(alumu_tesu))
+  aab
 
 Please note, that the result items are sorted by *alpha_3*. Please also
 note, that you can provide names to reduce the amount of result items, too.
@@ -309,8 +315,8 @@ First we fetch a specific country:
 
 The i18n translate method translates 'Germany' into German:
 
-  >>> zope.i18n.translate(germany.name, target_language='de')
-  u'Deutschland'
+  >>> print(zope.i18n.translate(germany.name, target_language='de'))
+  Deutschland
 
 
 There are also translations for scripts, currencies and languages.
@@ -325,8 +331,8 @@ test this, we will need another country object ``afghanistan``, which is not
 the *same* object as retrieved before:
 
 
-  >>> afghanistan = iter(gocept.country.CountrySource(alpha_2=['AF'])).next()
-  >>> afghanistan2 = iter(gocept.country.CountrySource(alpha_2=['AF'])).next()
+  >>> afghanistan = next(iter(gocept.country.CountrySource(alpha_2=['AF'])))
+  >>> afghanistan2 = next(iter(gocept.country.CountrySource(alpha_2=['AF'])))
 
   >>> str(afghanistan) == str(afghanistan2)
   False
@@ -363,31 +369,28 @@ Pickling and unpickling
 It should be possible to store "proxy objects" in a database (like the ZODB).
 Therefore, they have to be pickleable:
 
-  >>> import StringIO
-  >>> import cPickle
-  >>> f = StringIO.StringIO('')
-  >>> f.read()
-  ''
-
+  >>> from io import BytesIO
+  >>> import pickle
+  >>> f = BytesIO(b'')
 
 Pickling a country should never raise an error...
 
-  >>> cPickle.dump(afghanistan, f)
+  >>> pickle.dump(afghanistan, f)
 
 
 ... and results in storing the token in the pickle:
 
-  >>> f.seek(0)
-  >>> 'AF' in f.read()
+  >>> ignored = f.seek(0)
+  >>> b'AF' in f.read()
   True
 
 
 Reading the pickle again will return the same country which was pickled
 before:
 
-  >>> f.seek(0)
-  >>> afghanistan2 = cPickle.load(f)
+  >>> ignored = f.seek(0)
+  >>> afghanistan2 = pickle.load(f)
   >>> afghanistan2 == afghanistan
   True
-  >>> afghanistan2.name
-  u'Afghanistan'
+  >>> print(afghanistan2.name)
+  Afghanistan
