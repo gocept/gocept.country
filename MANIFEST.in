@@ -1,12 +1,6 @@
 include *.rst
 include *.txt
 
-include .coveragerc
-exclude .coveragerc
-
-include pytest.ini
-exclude pytest.ini
-
 include MANIFEST.in
 exclude MANIFEST.in
 
