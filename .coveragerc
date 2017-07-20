@@ -7,4 +7,7 @@ precision = 2
 omit = src/gocept/__init__.py
 
 [html]
-directory = test-report
+directory = test-report/coverage-report
+
+[xml]
+output = test-report/coverage.xml
