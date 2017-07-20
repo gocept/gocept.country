@@ -1,4 +1,4 @@
-from .db import Data
+from gocept.country.db import Data
 
 
 def test_db__Data____hash____():

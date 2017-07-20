@@ -14,6 +14,6 @@ def setUp(test):
 
 def test_suite():
     suite = doctest.DocFileSuite(
-        'README.txt', optionflags=doctest.ELLIPSIS, setUp=setUp)
+        '../README.txt', optionflags=doctest.ELLIPSIS, setUp=setUp)
     suite.layer = layer
     return suite
