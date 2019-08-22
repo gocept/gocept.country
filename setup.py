@@ -42,7 +42,7 @@ setup(
         'Natural Language :: English',
         'Operating System :: OS Independent',
         'Topic :: Internet :: WWW/HTTP'],
-    url='https://bitbucket.org/gocept/gocept.country',
+    url='https://github.com/gocept/gocept.country',
     packages=find_packages('src'),
     include_package_data=True,
     package_dir={'': 'src'},

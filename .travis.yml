@@ -1,0 +1,12 @@
+language: python
+dist: xenial
+python:
+  - 2.7
+  - 3.6
+  - pypy
+  - pypy3
+install:
+script: tox
+after_success: 
+cache:
+  pip: true

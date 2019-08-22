@@ -8,6 +8,8 @@ Changes
 
 - Replace test dependency on `zope.app.testing` by `zope.app.wsgi[testlayer]`.
 
+- Migrate to Github.
+
 
 2.0 (2017-01-21)
 ----------------
