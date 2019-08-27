@@ -1,12 +1,15 @@
 language: python
 dist: xenial
 python:
-  - 2.7
-  - 3.6
-  - pypy
-  - pypy3
-install:
+- 2.7
+- 3.6
+- pypy
+- pypy3
+install: 
 script: tox
 after_success: 
 cache:
   pip: true
+notifications:
+  webhooks:
+    secure: Ra2QH1vnaG+NxZ95Yl5goheM3fUEVcoPB7iyw81IMa9U++oi6iKTGNU+tEg7ZVVMzlOt1P+VbtOpQ6PEFSxxv+bCbacNq4RLxa86IRcKt3epYsoFyTtZPy6neO7e+CR1Rd8IoE/4oNZ4gOQ8dpoRJA4id5lMwNVQxyEEQEHqZs7I4byy3F70aJpD9sx5mYWEJH5/bc3Ix/n6h9RWd9JGudQYizNO7Jzi/RO6N+48R0TMlOY2GfgKWLygtFmivjMuBMFMhy1tcatzhbZ3sUojMuBHqKMY30NUd87vPZtgUmf1KPS6P9EHOzwFRsj40SPu5y9lagCYxPRjIr0Z9wpL+mqMR4GJAuOTOhcKybSKvsKeBqGRS3rMEL+DODeOIaHhioeC1Jqj4VKRZK90z8jYwoRP94y9+lVD7VhO4XHzVKTSO4zWjD7VJ/Ozlo7I/tBGY7GniTzqh8Essff5n0Tnldyzbw5t72RyPAaIA3WVLfypC3TZKnc62MUtmtVu6cBzc+NJmRmbilIIdcAmbjgTnMUtMQldH2CieJYc5Ft6BBkVL+9KRk5qwZlQVzwmqqh37SE8lGKq2ryh/CIARjM0ibJCmkIo3ZYzBB/8DdpNumWPh+kRljp2hkutMVt7tLQ+l9qbawXRUaSanBKolstSzrZ3BQJBG9jj7JasDFm7QlY=
