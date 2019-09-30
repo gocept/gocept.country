@@ -1,8 +1,12 @@
 include *.rst
 include *.txt
+include .coveragerc
+include pytest.ini
+include tox.ini
 
 include MANIFEST.in
 exclude MANIFEST.in
 
 recursive-include src *.txt
 recursive-include src *.zcml
+recursive-include src *.py
