@@ -1,13 +1,18 @@
 language: python
 dist: xenial
 python:
-- 2.7
-- 3.6
-- pypy
-- pypy3
-install: pip install tox-travis
+  - 2.7
+  - 3.5
+  - 3.6
+  - 3.7
+  - 3.8-dev
+  - pypy
+  - pypy3
+install: pip install tox-travis coverage coveralls
 script: tox
-after_success: 
+after_success:
+  - coverage combine
+  - coveralls
 cache:
   pip: true
 notifications:
