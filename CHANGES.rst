@@ -1,7 +1,7 @@
 Changes
 =======
 
-2.1 (unreleased)
+2.1 (2019-09-30)
 ----------------
 
 - Support Python 3.5 up to 3.8, PyPy and PyPy3.
