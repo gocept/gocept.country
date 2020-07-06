@@ -1,5 +1,3 @@
-syntax: glob
-
 *.egg-info
 *.pyc
 .DS_Store
@@ -8,8 +6,8 @@ syntax: glob
 .installed.cfg
 .tox/
 bin/
-coverage-report/
 coverage.xml
 develop-eggs/
+htmlcov/
 parts/
 test-report/
