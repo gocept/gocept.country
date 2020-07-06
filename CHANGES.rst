@@ -4,13 +4,13 @@ Changes
 2.2 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- Drop support for Python 3.5.
 
 
 2.1 (2019-09-30)
 ----------------
 
-- Support Python 3.5 up to 3.8, PyPy and PyPy3.
+- Add support for Python 3.5 up to 3.8, PyPy and PyPy3.
 
 - Replace test dependency on `zope.app.testing` by `zope.app.wsgi[testlayer]`.
 
