@@ -6,6 +6,8 @@ Changes
 
 - Drop support for Python 3.5.
 
+- Use Github actions as CI.
+
 
 2.1 (2019-09-30)
 ----------------

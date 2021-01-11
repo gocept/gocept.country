@@ -8,6 +8,7 @@ def read(*rnames):
     with open(os.path.join(os.curdir, *rnames)) as f:
         return f.read()
 
+
 setup(
     name='gocept.country',
     version='2.2.dev0',
