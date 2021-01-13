@@ -1,6 +1,9 @@
-.. image:: https://travis-ci.com/gocept/gocept.country.svg?branch=master
-    :target: https://travis-ci.com/gocept/gocept.country
-    
+==============
+gocept.country
+==============
+
+.. image:: https://github.com/gocept/gocept.country/workflows/tests/badge.svg
+    :target: https://github.com/gocept/gocept.country/actions?query=workflow%3Atests
 .. image:: https://coveralls.io/repos/github/gocept/gocept.country/badge.svg?branch=master
     :target: https://coveralls.io/github/gocept/gocept.country?branch=master
 

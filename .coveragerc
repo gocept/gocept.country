@@ -5,3 +5,4 @@ source = gocept.country
 [report]
 precision = 2
 omit = src/gocept/__init__.py
+fail_under = 100

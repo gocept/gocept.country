@@ -1,7 +1,5 @@
-==============
-gocept.country
-==============
-
+Introduction
+============
 
 `gocept.country` provides Zope 3 sources for the pycountry databases. You can
 use it e.g. to get a ``zope.schema.Choice`` field with all ISO 3166 countries.
