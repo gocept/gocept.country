@@ -121,4 +121,3 @@ Contributors
 ============
 
 - Michael Howitz <mh at gocept dot com>
-

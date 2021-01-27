@@ -1,6 +1,6 @@
-# vim:fileencoding=utf-8
+from setuptools import find_packages
+from setuptools import setup
 import os.path
-from setuptools import setup, find_packages
 
 
 def read(*rnames):
