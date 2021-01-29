@@ -1,4 +1,3 @@
-# -*- coding: latin-1 -*-
 import gocept.country.db
 import gocept.country.interfaces
 import pycountry

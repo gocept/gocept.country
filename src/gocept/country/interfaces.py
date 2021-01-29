@@ -1,4 +1,3 @@
-# -*- coding: latin-1 -*-
 # Copyright (c) 2008-2017 gocept gmbh & co. kg
 
 import zope.interface
