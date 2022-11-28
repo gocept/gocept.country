@@ -4,6 +4,8 @@ Changes
 2.2 (unreleased)
 ----------------
 
+- Add support for Python 3,9, 3.10, 3.11.
+
 - Drop support for Python 3.5.
 
 - Use Github actions as CI.
