@@ -10,7 +10,7 @@ class BasicSource(zc.sourcefactory.basic.BasicSourceFactory):
     """A basic source for countries, scripts, languages and currencies."""
 
     def __init__(self, **kw):
-        super(BasicSource, self).__init__()
+        super().__init__()
         self.filter = kw
 
     def __contains__(self, item):

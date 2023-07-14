@@ -15,7 +15,7 @@ iso4217msg = zope.i18nmessageid.MessageFactory('iso4217')
 iso639msg = zope.i18nmessageid.MessageFactory('iso639')
 
 
-class Data(object):
+class Data:
     """ """
 
     def __init__(self, token):
