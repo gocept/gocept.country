@@ -11,7 +11,7 @@ def read(*rnames):
 
 setup(
     name='gocept.country',
-    version='2.2.dev0',
+    version='3.0.dev0',
     author='gocept gmbh & co. kg',
     author_email='mail@gocept.com',
     description='Zope 3 sources for pycountry databases',
@@ -32,10 +32,7 @@ setup(
         'License :: OSI Approved',
         'License :: OSI Approved :: Zope Public License',
         'Programming Language :: Python',
-        'Programming Language :: Python :: 2',
-        'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7',
         'Programming Language :: Python :: 3.8',
         'Programming Language :: Python :: 3.9',
@@ -51,6 +48,7 @@ setup(
     packages=find_packages('src'),
     include_package_data=True,
     package_dir={'': 'src'},
+    python_requires='>=3.7',
     install_requires=['setuptools',
                       'pycountry >= 16.0',
                       'zope.i18nmessageid',

@@ -1,14 +1,12 @@
 Changes
 =======
 
-2.2 (unreleased)
+3.0 (unreleased)
 ----------------
 
-- Add support for Python 3,9, 3.10, 3.11.
+- Drop support for Python 2.7, 3.5, 3.6.
 
-- Drop support for Python 3.5.
-
-- Use Github actions as CI.
+- Add support for Python 3.9, 3.10, 3.11.
 
 
 2.1 (2019-09-30)
