@@ -48,6 +48,7 @@ setup(
     packages=find_packages('src'),
     include_package_data=True,
     package_dir={'': 'src'},
+    python_requires='>=3.7',
     install_requires=['setuptools',
                       'pycountry >= 16.0',
                       'zope.i18nmessageid',
